@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact - KARIBU KITCHEN</title>
+<style>
+* { box-sizing: border-box; font-family: Arial, sans-serif; }
+body { margin: 0; background: #FFF8E7; }
+header { background: #0B3D2E; color: white; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; }
+.logo { font-size: 22px; font-weight: bold; }
+.logo span { color: #FFC107; }
+nav a { color: white; text-decoration: none; margin: 0 8px; }
+nav a.active { color: #FFC107; }
+section { padding: 25px 20px; max-width: 700px; margin: auto; }
+input, textarea { width: 100%; padding: 11px; margin: 8px 0 15px; border: 1px solid #ccc; border-radius: 6px; }
+.btn-gold { background: #FFC107; color: #000; padding: 12px 25px; border: none; font-weight: bold; border-radius: 6px; cursor: pointer; }
+footer { background: #0B3D2E; color: white; text-align: center; padding: 20px; }
+.msg-box { background: white; border: 1px solid #ddd; padding: 12px; margin: 10px 0; border-radius: 8px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">🍽️ KARIBU <span>KITCHEN</span></div>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="menu.html">Menu</a>
+    <a href="about.html">About</a>
+    <a href="contact.html" class="active">Contact</a>
+    <a href="reservation.html">Reservation</a>
+  </nav>
+</header>
+
+<main>
+<section>
+  <h2>Contact Us</h2>
+  <p><strong>Location:</strong> Kariakoo, Dar es Salaam, Tanzania</p>
+  <p><strong>Phone:</strong> +255 742 476 189</p>
+  <p><strong>Email:</strong> info@karibukitchen.co.tz</p>
+  <p><strong>Hours:</strong> Mon - Sun: 09:00 - 23:00</p>
+
+  <h3>Send Us a Message</h3>
+  <p id="formError" style="color:red;font-weight:bold;"></p>
+  <p id="contactFeedback" style="color:green;font-weight:bold;"></p>
+
+  <form id="contactForm">
+    <label>Your Name *</label>
+    <input type="text" id="contactName" placeholder="Your name">
+    <label>Your Email *</label>
+    <input type="email" id="contactEmail" placeholder="you@example.com">
+    <label>Message *</label>
+    <textarea id="contactMsg" rows="4" placeholder="Your message"></textarea>
+    <button type="submit" class="btn-gold">Send Message</button>
+  </form>
+
+  <h3>Messages You Sent (Saved on this computer)</h3>
+  <div id="messageList"></div>
+</section>
+</main>
+
+<footer><p>KARIBU KITCHEN | Dar es Salaam</p></footer>
+
+<script>
+// HII NDIO INAYOFANYA SEND MESSAGE IFANYE KAZI
+function showMessages() {
+  let list = document.getElementById('messageList');
+  let msgs = JSON.parse(localStorage.getItem('karibuMessages')) || [];
+  list.innerHTML = '';
+  if (msgs.length === 0) {
+    list.innerHTML = '<p>No messages yet.</p>';
+    return;
+  }
+  msgs.forEach(m => {
+    let div = document.createElement('div');
+    div.className = 'msg-box';
+    div.innerHTML = '<strong>' + m.name + '</strong> (' + m.email + ')<br>' + m.message;
+    list.appendChild(div);
+  });
+}
+showMessages();
+
+document.getElementById('contactForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  let name = document.getElementById('contactName').value.trim();
+  let email = document.getElementById('contactEmail').value.trim();
+  let msg = document.getElementById('contactMsg').value.trim();
+  let err = document.getElementById('formError');
+  let ok = document.getElementById('contactFeedback');
+  err.textContent = ''; ok.textContent = '';
+
+  if (name === '') { err.textContent = 'Please enter your name.'; return; }
+  if (email === '' || !email.includes('@')) { err.textContent = 'Please enter valid email.'; return; }
+  if (msg === '') { err.textContent = 'Please write your message.'; return; }
+
+  let all = JSON.parse(localStorage.getItem('karibuMessages')) || [];
+  all.push({ name: name, email: email, message: msg });
+  localStorage.setItem('karibuMessages', JSON.stringify(all));
+
+  ok.textContent = 'Thank you ' + name + '! Your message has been sent. We will reply soon.';
+  showMessages();
+  document.getElementById('contactForm').reset();
+});
+</script>
+
+</body>
+</html>

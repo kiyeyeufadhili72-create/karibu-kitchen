@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Menu - KARIBU KITCHEN</title>
+<style>
+* { box-sizing: border-box; font-family: Arial, sans-serif; }
+body { margin: 0; background: #FFF8E7; }
+header { background: #0B3D2E; color: white; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; }
+.logo { font-size: 22px; font-weight: bold; }
+.logo span { color: #FFC107; }
+nav a { color: white; text-decoration: none; margin: 0 8px; }
+nav a.active { color: #FFC107; }
+#cartBtn { background: #FFC107; border: none; padding: 9px 15px; font-weight: bold; border-radius: 20px; cursor: pointer; }
+section { padding: 20px; max-width: 1050px; margin: auto; }
+input, select { width: 100%; padding: 11px; margin: 8px 0 15px; border: 1px solid #ccc; border-radius: 6px; }
+.filter-btn { padding: 8px 16px; margin: 4px; cursor: pointer; border: 1px solid #0B3D2E; background: white; border-radius: 20px; }
+.filter-btn.active { background: #FFC107; font-weight: bold; }
+.menu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 16px; }
+.card { background: white; border: 1px solid #eee; padding: 12px; border-radius: 12px; }
+.card img { width: 100%; height: 160px; object-fit: cover; border-radius: 8px; }
+.price { font-weight: bold; color: #0B7A43; font-size: 18px; }
+.add-btn { background: #0B3D2E; color: white; padding: 10px; width: 100%; cursor: pointer; border: none; border-radius: 6px; }
+.cart-box { background: white; border: 2px solid #FFC107; padding: 20px; max-width: 650px; margin: 20px auto; border-radius: 10px; }
+footer { background: #0B3D2E; color: white; text-align: center; padding: 20px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">🍽️ KARIBU <span>KITCHEN</span></div>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="menu.html" class="active">Menu</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+    <a href="reservation.html">Reservation</a>
+  </nav>
+  <button id="cartBtn">🛒 Cart (<span id="cartCount">0</span>)</button>
+</header>
+
+<main>
+<section>
+  <h2>Our Full Menu</h2>
+  <p>Chagua chakula au kinywaji. Bei zote ni TZS.</p>
+  <input type="text" id="searchInput" placeholder="Search... e.g. Pilau, Pizza, Juice">
+  <div>
+    <button class="filter-btn active" data-filter="all">All</button>
+    <button class="filter-btn" data-filter="local">Tanzanian</button>
+    <button class="filter-btn" data-filter="fast">Fast Food</button>
+    <button class="filter-btn" data-filter="drinks">Drinks</button>
+    <button class="filter-btn" data-filter="dessert">Dessert</button>
+  </div>
+
+  <div class="menu-grid">
+    <div class="card" data-category="local" data-name="Beef Pilau">
+      <img src="https://images.unsplash.com/photo-1512058564366-18510be2db19?w=600" alt="Beef Pilau">
+      <h3>Beef Pilau</h3><p>Mchele wa viungo na nyama laini.</p><p class="price">TZS 15,000</p>
+      <button class="add-btn" data-name="Beef Pilau" data-price="15000">Add to Cart</button>
+    </div>
+    <div class="card" data-category="local" data-name="Grilled Chicken">
+      <img src="https://images.unsplash.com/photo-1598103442097-8b74394b95c6?w=600" alt="Grilled Chicken">
+      <h3>Grilled Chicken</h3><p>Kuku wa kuchoma na mchuzi.</p><p class="price">TZS 18,000</p>
+      <button class="add-btn" data-name="Grilled Chicken" data-price="18000">Add to Cart</button>
+    </div>
+    <div class="card" data-category="fast" data-name="Pizza Karibu Special">
+      <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=600" alt="Pizza">
+      <h3>Pizza Karibu Special</h3><p>Jibini, kuku na pilipili hoho.</p><p class="price">TZS 25,000</p>
+      <button class="add-btn" data-name="Pizza Karibu Special" data-price="25000">Add to Cart</button>
+    </div>
+    <div class="card" data-category="fast" data-name="Beef Burger">
+      <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=600" alt="Burger">
+      <h3>Beef Burger + Chips</h3><p>Burger ya nyama na chips.</p><p class="price">TZS 14,000</p>
+      <button class="add-btn" data-name="Beef Burger" data-price="14000">Add to Cart</button>
+    </div>
+    <div class="card" data-category="drinks" data-name="Fresh Mango Juice">
+      <img src="https://images.unsplash.com/photo-1600271886742-f049cd451bba?w=600" alt="Mango Juice">
+      <h3>Fresh Mango Juice</h3><p>Juisi safi ya embe 100%.</p><p class="price">TZS 8,000</p>
+      <button class="add-btn" data-name="Fresh Mango Juice" data-price="8000">Add to Cart</button>
+    </div>
+    <div class="card" data-category="drinks" data-name="Soda">
+      <img src="https://images.unsplash.com/photo-1581636625402-29b2a704ef13?w=600" alt="Soda">
+      <h3>Soda Baridi</h3><p>Soda yoyote unayopenda.</p><p class="price">TZS 3,000</p>
+      <button class="add-btn" data-name="Soda" data-price="3000">Add to Cart</button>
+    </div>
+    <div class="card" data-category="dessert" data-name="Chocolate Cake">
+      <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=600" alt="Cake">
+      <h3>Chocolate Cake</h3><p>Keki laini ya chokoleti.</p><p class="price">TZS 12,000</p>
+      <button class="add-btn" data-name="Chocolate Cake" data-price="12000">Add to Cart</button>
+    </div>
+    <div class="card" data-category="dessert" data-name="Ice Cream">
+      <img src="https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=600" alt="Ice Cream">
+      <h3>Ice Cream</h3><p>Vanilla, Chocolate au Strawberry.</p><p class="price">TZS 9,000</p>
+      <button class="add-btn" data-name="Ice Cream" data-price="9000">Add to Cart</button>
+    </div>
+  </div>
+  <p id="noResult" style="display:none;color:red;">No food found.</p>
+</section>
+
+<div id="cartBox" class="cart-box" style="display:none;">
+  <h3>🛒 Your Order</h3>
+  <ul id="cartItems"></ul>
+  <p><strong>Total: TZS <span id="cartTotal">0</span></strong></p>
+  <button id="checkoutBtn" style="background:#FFC107;padding:10px 20px;border:none;font-weight:bold;cursor:pointer;">Checkout</button>
+  <button id="clearCart">Clear Cart</button>
+  <button id="closeCart">Close</button>
+  <p id="checkoutMsg" style="color:green;font-weight:bold;"></p>
+</div>
+</main>
+
+<footer><p>KARIBU KITCHEN | Dar es Salaam</p></footer>
+
+<script>
+// HII NDIO INAYOFANYA ADD TO CART IFANYE KAZI - IPO NDANI YA FILE HII HII
+let cart = [];
+let currentFilter = 'all';
+const cards = document.querySelectorAll('.card');
+const searchInput = document.getElementById('searchInput');
+
+function filterMenu() {
+  let text = searchInput.value.toLowerCase();
+  let found = 0;
+  cards.forEach(card => {
+    let name = card.getAttribute('data-name').toLowerCase();
+    let cat = card.getAttribute('data-category');
+    let ok = name.includes(text) && (currentFilter === 'all' || cat === currentFilter);
+    card.style.display = ok ? 'block' : 'none';
+    if (ok) found++;
+  });
+  document.getElementById('noResult').style.display = found === 0 ? 'block' : 'none';
+}
+searchInput.addEventListener('input', filterMenu);
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentFilter = btn.getAttribute('data-filter');
+    filterMenu();
+  });
+});
+
+function updateCart() {
+  document.getElementById('cartCount').textContent = cart.length;
+  let list = document.getElementById('cartItems');
+  list.innerHTML = '';
+  let total = 0;
+  cart.forEach((item, i) => {
+    total += item.price;
+    let li = document.createElement('li');
+    li.textContent = item.name + ' - TZS ' + item.price.toLocaleString() + ' ';
+    let rm = document.createElement('button');
+    rm.textContent = 'Remove';
+    rm.onclick = function() { cart.splice(i, 1); updateCart(); };
+    li.appendChild(rm);
+    list.appendChild(li);
+  });
+  document.getElementById('cartTotal').textContent = total.toLocaleString();
+}
+
+document.querySelectorAll('.add-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    cart.push({ name: btn.getAttribute('data-name'), price: Number(btn.getAttribute('data-price')) });
+    updateCart();
+    alert(btn.getAttribute('data-name') + ' added to cart!');
+  });
+});
+
+document.getElementById('cartBtn').addEventListener('click', () => {
+  let box = document.getElementById('cartBox');
+  box.style.display = box.style.display === 'none' ? 'block' : 'none';
+});
+document.getElementById('closeCart').addEventListener('click', () => {
+  document.getElementById('cartBox').style.display = 'none';
+});
+document.getElementById('clearCart').addEventListener('click', () => { cart = []; updateCart(); });
+document.getElementById('checkoutBtn').addEventListener('click', () => {
+  if (cart.length === 0) { alert('Cart is empty!'); return; }
+  let total = cart.reduce((s, i) => s + i.price, 0);
+  document.getElementById('checkoutMsg').textContent = 'Thank you! Your order of TZS ' + total.toLocaleString() + ' has been received.';
+  cart = []; updateCart();
+});
+</script>
+
+</body>
+</html>
