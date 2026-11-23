@@ -102,6 +102,22 @@ document.getElementById('contactForm').addEventListener('submit', function(e) {
   document.getElementById('contactForm').reset();
 });
 </script>
-
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+  const form = document.querySelector('form');
+  if(!form) return;
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    let text = "Habari Karibu Kitchen! Nataka kuorder / kuuliza:%0A%0A";
+    form.querySelectorAll('input, textarea, select').forEach(function(el){
+      if(el.value && el.type !== 'submit'){
+        let label = el.placeholder || el.name || 'Taarifa';
+        text += label + ": " + el.value + "%0A";
+      }
+    });
+    window.open('https://wa.me/255742476189?text=' + text, '_blank');
+  });
+});
+</script>
 </body>
 </html>
