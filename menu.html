@@ -12,9 +12,9 @@ h1{margin:5px 0} .sub{color:#fde68a}
 .filters{text-align:center;padding:15px} .filters button{padding:8px 16px;margin:4px;border-radius:20px;border:1px solid #ddd;background:#fff;cursor:pointer} .filters button.active{background:#ea580c;color:#fff}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;padding:16px;max-width:1100px;margin:auto}
 .card{background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,.1)}
-.card img{width:100%;height:180px;object-fit:cover;background:#fed7aa}
+.card img{width:100%;height:200px;object-fit:cover}
 .card-body{padding:14px} .card-body h3{margin:0 0 5px} .desc{color:#666;font-size:13px;min-height:36px} .price{font-weight:bold;color:#ea580c;font-size:18px;margin:8px 0}
-.add{width:100%;background:#ea580c;color:#fff;border:none;padding:11px;border-radius:8px;font-weight:bold;cursor:pointer;font-size:15px} .add:active{background:#9a3412}
+.add{width:100%;background:#ea580c;color:#fff;border:none;padding:11px;border-radius:8px;font-weight:bold;cursor:pointer;font-size:15px}
 #cartBtn{position:fixed;bottom:20px;right:20px;background:#25D366;color:#fff;border:none;padding:15px 20px;border-radius:50px;font-weight:bold;z-index:9999;box-shadow:0 4px 14px rgba(0,0,0,.35);cursor:pointer;font-size:16px;display:none}
 #cartBox{position:fixed;bottom:85px;right:15px;left:15px;max-width:380px;margin-left:auto;background:#fff;border-radius:14px;box-shadow:0 5px 25px rgba(0,0,0,.35);z-index:9999;padding:16px;display:none;max-height:75vh;overflow:auto}
 .cart-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid #eee;font-size:14px}
@@ -39,15 +39,25 @@ input{width:100%;padding:10px;margin-top:8px;border:1px solid #ddd;border-radius
 <button onclick="filterMenu('dessert',this)">Desserts</button>
 </div>
 <div class="grid" id="menuGrid">
-<div class="card" data-cat="main"><div style="background:#fed7aa;height:180px;display:flex;align-items:center;justify-content:center;font-size:60px">🍛</div><div class="card-body"><h3>Beef Pilau</h3><div class="desc">Fragrant spiced rice with tender beef, served with kachumbari.</div><div class="price">TZS 15,000</div><button class="add" data-name="Beef Pilau" data-price="15000">Add to Cart</button></div></div>
-<div class="card" data-cat="main"><div style="background:#fed7aa;height:180px;display:flex;align-items:center;justify-content:center;font-size:60px">🍛</div><div class="card-body"><h3>Chicken Biryani</h3><div class="desc">Delicious biryani with chicken, spices and salad.</div><div class="price">TZS 18,000</div><button class="add" data-name="Chicken Biryani" data-price="18000">Add to Cart</button></div></div>
-<div class="card" data-cat="main"><div style="background:#fed7aa;height:180px;display:flex;align-items:center;justify-content:center;font-size:60px">🍲</div><div class="card-body"><h3>Ugali & Beef Stew</h3><div class="desc">Soft ugali with rich beef stew and greens.</div><div class="price">TZS 16,000</div><button class="add" data-name="Ugali & Beef Stew" data-price="16000">Add to Cart</button></div></div>
-<div class="card" data-cat="grill"><div style="background:#fed7aa;height:180px;display:flex;align-items:center;justify-content:center;font-size:60px">🐟</div><div class="card-body"><h3>Grilled Tilapia</h3><div class="desc">Fresh grilled tilapia with chips and salad.</div><div class="price">TZS 22,000</div><button class="add" data-name="Grilled Tilapia" data-price="22000">Add to Cart</button></div></div>
-<div class="card" data-cat="grill"><div style="background:#fed7aa;height:180px;display:flex;align-items:center;justify-content:center;font-size:60px">🍢</div><div class="card-body"><h3>Chicken Mishkaki</h3><div class="desc">Grilled chicken skewers, tasty and juicy.</div><div class="price">TZS 12,000</div><button class="add" data-name="Chicken Mishkaki" data-price="12000">Add to Cart</button></div></div>
-<div class="card" data-cat="grill"><div style="background:#fed7aa;height:180px;display:flex;align-items:center;justify-content:center;font-size:60px">🍢</div><div class="card-body"><h3>Beef Mishkaki</h3><div class="desc">Grilled beef skewers with pili pili.</div><div class="price">TZS 10,000</div><button class="add" data-name="Beef Mishkaki" data-price="10000">Add to Cart</button></div></div>
-<div class="card" data-cat="breakfast"><div style="background:#fed7aa;height:180px;display:flex;align-items:center;justify-content:center;font-size:60px">🥞</div><div class="card-body"><h3>Chapati & Maharage</h3><div class="desc">Soft chapati with beans.</div><div class="price">TZS 8,000</div><button class="add" data-name="Chapati & Maharage" data-price="8000">Add to Cart</button></div></div>
-<div class="card" data-cat="drink"><div style="background:#fed7aa;height:180px;display:flex;align-items:center;justify-content:center;font-size:60px">🥤</div><div class="card-body"><h3>Fresh Juice</h3><div class="desc">Mango / Orange / Passion fresh juice.</div><div class="price">TZS 5,000</div><button class="add" data-name="Fresh Juice" data-price="5000">Add to Cart</button></div></div>
-<div class="card" data-cat="dessert"><div style="background:#fed7aa;height:180px;display:flex;align-items:center;justify-content:center;font-size:60px">🍰</div><div class="card-body"><h3>Maandazi</h3><div class="desc">Sweet fried maandazi, 4 pcs.</div><div class="price">TZS 4,000</div><button class="add" data-name="Maandazi" data-price="4000">Add to Cart</button></div></div>
+
+<div class="card" data-cat="main"><img src="https://54flavours.com/__l5e/assets-v1/f2781a75-d731-4aa5-beef-112bf48a3b9a/pilau-ya-nyama-tanzania.jpg"><div class="card-body"><h3>Beef Pilau</h3><div class="desc">Fragrant spiced rice with tender beef, served with kachumbari.</div><div class="price">TZS 15,000</div><button class="add" data-name="Beef Pilau" data-price="15000">Add to Cart</button></div></div>
+
+<div class="card" data-cat="main"><img src="https://my-org-space.nyc3.cdn.digitaloceanspaces.com/restobudd/items/01JB9KX4SQ2ER0M5DDS2G0VH4J.jpg"><div class="card-body"><h3>Chicken Biryani</h3><div class="desc">Delicious biryani with chicken, spices and salad.</div><div class="price">TZS 18,000</div><button class="add" data-name="Chicken Biryani" data-price="18000">Add to Cart</button></div></div>
+
+<div class="card" data-cat="main"><img src="https://i.pinimg.com/originals/22/31/f4/2231f4087f369157e3d2651f6fa434f7.jpg"><div class="card-body"><h3>Ugali & Beef Stew</h3><div class="desc">Soft ugali with rich beef stew and greens.</div><div class="price">TZS 16,000</div><button class="add" data-name="Ugali & Beef Stew" data-price="16000">Add to Cart</button></div></div>
+
+<div class="card" data-cat="grill"><img src="https://images.unsplash.com/photo-1535399831218-d5bd36d1a6b3?w=600&q=80"><div class="card-body"><h3>Grilled Tilapia</h3><div class="desc">Fresh grilled tilapia with chips and salad.</div><div class="price">TZS 22,000</div><button class="add" data-name="Grilled Tilapia" data-price="22000">Add to Cart</button></div></div>
+
+<div class="card" data-cat="grill"><img src="https://images.bolt.eu/store/2024/2024-09-12/a4598ad0-3bac-40e0-af82-7d94000f7955.jpeg"><div class="card-body"><h3>Chicken Mishkaki</h3><div class="desc">Grilled chicken skewers, tasty and juicy.</div><div class="price">TZS 12,000</div><button class="add" data-name="Chicken Mishkaki" data-price="12000">Add to Cart</button></div></div>
+
+<div class="card" data-cat="grill"><img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=600&q=80"><div class="card-body"><h3>Beef Mishkaki</h3><div class="desc">Grilled beef skewers with pili pili.</div><div class="price">TZS 10,000</div><button class="add" data-name="Beef Mishkaki" data-price="10000">Add to Cart</button></div></div>
+
+<div class="card" data-cat="breakfast"><img src="https://globalpublishers.co.tz/wp-content/uploads/2021/08/Chapati.jpg"><div class="card-body"><h3>Chapati & Maharage</h3><div class="desc">Soft chapati with beans.</div><div class="price">TZS 8,000</div><button class="add" data-name="Chapati & Maharage" data-price="8000">Add to Cart</button></div></div>
+
+<div class="card" data-cat="drink"><img src="https://images.unsplash.com/photo-1600271886742-f049cd451bba?w=600&q=80"><div class="card-body"><h3>Fresh Juice</h3><div class="desc">Mango / Orange / Passion fresh juice.</div><div class="price">TZS 5,000</div><button class="add" data-name="Fresh Juice" data-price="5000">Add to Cart</button></div></div>
+
+<div class="card" data-cat="dessert"><img src="https://vegsoc.org/app/uploads/2025/05/Mandazi-1024x683.jpg"><div class="card-body"><h3>Maandazi</h3><div class="desc">Sweet fried maandazi, 4 pcs.</div><div class="price">TZS 4,000</div><button class="add" data-name="Maandazi" data-price="4000">Add to Cart</button></div></div>
+
 </div>
 
 <button id="cartBtn">🛒 Cart (0) - TZS 0</button>
