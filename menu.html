@@ -181,30 +181,65 @@ document.getElementById('checkoutBtn').addEventListener('click', () => {
   cart = []; updateCart();
 });
 </script>
+<style>
+#cartBtn{position:fixed;bottom:20px;right:20px;background:#25D366;color:#fff;border:none;padding:14px 18px;border-radius:50px;font-weight:bold;z-index:9999;box-shadow:0 4px 12px rgba(0,0,0,.3);cursor:pointer;display:none}
+#cartBox{position:fixed;bottom:80px;right:20px;background:#fff;color:#000;width:300px;max-width:90vw;border-radius:12px;box-shadow:0 4px 20px rgba(0,0,0,.3);z-index:9999;padding:15px;display:none}
+#cartBox h3{margin:0 0 10px}
+.cart-item{display:flex;justify-content:space-between;margin:5px 0;font-size:14px}
+#checkoutBtn{background:#25D366;color:#fff;border:none;width:100%;padding:12px;border-radius:8px;font-weight:bold;margin-top:10px;cursor:pointer}
+</style>
+<div id="cartBox">
+  <h3>🛒 Cart Yako</h3>
+  <div id="cartItems"></div>
+  <hr>
+  <b id="cartTotal">Jumla: TZS 0</b>
+  <button id="checkoutBtn">Tuma Order kwa WhatsApp</button>
+</div>
+<button id="cartBtn">🛒 View Cart (0)</button>
+
 <script>
+let cart = [];
 document.addEventListener('DOMContentLoaded', function(){
-  const buttons = document.querySelectorAll('button, a');
-  buttons.forEach(function(btn){
+  document.querySelectorAll('button, a').forEach(function(btn){
     if(btn.textContent.trim().toLowerCase().includes('add to cart')){
       btn.addEventListener('click', function(e){
         e.preventDefault();
-        e.stopPropagation();
         let card = btn.closest('div');
-        let name = card ? card.querySelector('h3, h4, .title')?.textContent?.trim() : '';
-        if(!name){
-          // jaribu kupata jina karibu na button
-          let parent = btn.parentElement;
-          name = parent ? parent.querySelector('h3, h4')?.textContent?.trim() : 'Chakula';
-        }
-        let priceText = btn.parentElement ? btn.parentElement.textContent.match(/TZS[\s0-9,]+/i) : null;
-        let price = priceText ? priceText[0] : '';
-        let msg = "Habari Karibu Kitchen! Nataka ku-order:%0A%0A" + encodeURIComponent(name) + " - " + encodeURIComponent(price) + "%0A%0AAsante!";
-        window.open('https://wa.me/255742476189?text=' + msg, '_blank');
+        let name = card?.querySelector('h3, h4')?.textContent?.trim() || 'Chakula';
+        let m = btn.parentElement?.textContent.match(/TZS\s*([\d,]+)/i);
+        let price = m ? parseInt(m[1].replace(/,/g,'')) : 0;
+        cart.push({name, price});
+        updateCart();
+        btn.textContent = '✓ Added!';
+        setTimeout(()=> btn.textContent = 'Add to Cart', 800);
       });
     }
   });
+  document.getElementById('cartBtn').onclick = function(){
+    let box = document.getElementById('cartBox');
+    box.style.display = box.style.display==='block' ? 'none' : 'block';
+  };
+  document.getElementById('checkoutBtn').onclick = function(){
+    if(cart.length===0){ alert('Cart iko tupu!'); return; }
+    let text = "Habari Karibu Kitchen! Nataka ku-order:%0A%0A";
+    cart.forEach((it,i)=>{ text += (i+1)+". "+it.name+" - TZS "+it.price.toLocaleString()+"%0A"; });
+    let total = cart.reduce((s,it)=>s+it.price,0);
+    text += "%0AJumla: TZS "+total.toLocaleString();
+    window.open('https://wa.me/255742476189?text='+text, '_blank');
+  };
 });
+function updateCart(){
+  let btn = document.getElementById('cartBtn');
+  let itemsDiv = document.getElementById('cartItems');
+  btn.style.display = 'block';
+  btn.textContent = '🛒 View Cart ('+cart.length+')';
+  itemsDiv.innerHTML = cart.map((it,i)=> '<div class="cart-item"><span>'+(i+1)+'. '+it.name+'</span><b>TZS '+it.price.toLocaleString()+'</b></div>').join('');
+  let total = cart.reduce((s,it)=>s+it.price,0);
+  document.getElementById('cartTotal').textContent = 'Jumla: TZS '+total.toLocaleString();
+}
 </script>
+
 </body>
 
 </html>
+
