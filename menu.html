@@ -181,6 +181,30 @@ document.getElementById('checkoutBtn').addEventListener('click', () => {
   cart = []; updateCart();
 });
 </script>
-
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+  const buttons = document.querySelectorAll('button, a');
+  buttons.forEach(function(btn){
+    if(btn.textContent.trim().toLowerCase().includes('add to cart')){
+      btn.addEventListener('click', function(e){
+        e.preventDefault();
+        e.stopPropagation();
+        let card = btn.closest('div');
+        let name = card ? card.querySelector('h3, h4, .title')?.textContent?.trim() : '';
+        if(!name){
+          // jaribu kupata jina karibu na button
+          let parent = btn.parentElement;
+          name = parent ? parent.querySelector('h3, h4')?.textContent?.trim() : 'Chakula';
+        }
+        let priceText = btn.parentElement ? btn.parentElement.textContent.match(/TZS[\s0-9,]+/i) : null;
+        let price = priceText ? priceText[0] : '';
+        let msg = "Habari Karibu Kitchen! Nataka ku-order:%0A%0A" + encodeURIComponent(name) + " - " + encodeURIComponent(price) + "%0A%0AAsante!";
+        window.open('https://wa.me/255742476189?text=' + msg, '_blank');
+      });
+    }
+  });
+});
+</script>
 </body>
+
 </html>
